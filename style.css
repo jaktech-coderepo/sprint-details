@@ -1,47 +1,87 @@
-body {
-    margin: 0;
-    padding: 0;
-    background: #111827;
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
+body{
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+margin:0;
 
-    height: 100vh;
+font-family:Arial;
+
+background:#111827;
+
+color:white;
+
+padding:30px;
+
 }
 
-.container {
-    text-align: center;
+.container{
+
+max-width:1200px;
+
+margin:auto;
+
 }
 
-h3 {
-    color: #60a5fa;
-    margin-bottom: 10px;
+h1{
+
+text-align:center;
+
+margin-bottom:30px;
+
 }
 
-h1 {
-    font-size: 70px;
-    margin: 10px 0;
+.card{
+
+background:#1f2937;
+
+padding:20px;
+
+border-radius:10px;
+
+margin-bottom:20px;
+
 }
 
-.date {
-    color: #cbd5e1;
+.grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+
+gap:20px;
+
 }
 
-.days {
-    margin-top: 40px;
+progress{
+
+width:100%;
+
+height:20px;
+
 }
 
-#dayCount {
-    display: block;
-    font-size: 80px;
-    font-weight: bold;
-    color: #22c55e;
+ul{
+
+padding-left:18px;
+
+line-height:1.8;
+
 }
 
-small {
-    color: #94a3b8;
-    font-size: 18px;
+.dates{
+
+display:flex;
+
+justify-content:space-between;
+
+margin-top:20px;
+
+}
+
+#progressText{
+
+font-size:22px;
+
+margin:15px 0;
+
+font-weight:bold;
+
 }
