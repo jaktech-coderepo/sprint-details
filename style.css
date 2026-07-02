@@ -1,87 +1,398 @@
-body{
+/* ===========================
+   JAK Technologies Dashboard
+=========================== */
 
-margin:0;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-font-family:Arial;
+:root {
 
-background:#111827;
+    --bg: #0d1117;
+    --card: #161b22;
+    --border: #30363d;
 
-color:white;
+    --text: #f0f6fc;
+    --secondary: #8b949e;
 
-padding:30px;
+    --blue: #58a6ff;
+    --green: #3fb950;
+    --yellow: #d29922;
+    --red: #f85149;
 
 }
 
-.container{
+body {
 
-max-width:1200px;
+    font-family: "Segoe UI", Arial, sans-serif;
 
-margin:auto;
+    background: var(--bg);
 
-}
+    color: var(--text);
 
-h1{
-
-text-align:center;
-
-margin-bottom:30px;
+    padding: 25px;
 
 }
 
-.card{
+/* ===========================
+   Container
+=========================== */
 
-background:#1f2937;
+.container {
 
-padding:20px;
+    max-width: 1500px;
 
-border-radius:10px;
-
-margin-bottom:20px;
-
-}
-
-.grid{
-
-display:grid;
-
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-
-gap:20px;
+    margin: auto;
 
 }
 
-progress{
+/* ===========================
+   Header
+=========================== */
 
-width:100%;
+.header {
 
-height:20px;
+    display: flex;
 
-}
+    justify-content: space-between;
 
-ul{
+    align-items: center;
 
-padding-left:18px;
-
-line-height:1.8;
-
-}
-
-.dates{
-
-display:flex;
-
-justify-content:space-between;
-
-margin-top:20px;
+    margin-bottom: 25px;
 
 }
 
-#progressText{
+.header h1 {
 
-font-size:22px;
+    font-size: 34px;
 
-margin:15px 0;
+    margin-bottom: 6px;
 
-font-weight:bold;
+}
+
+.subtitle {
+
+    color: var(--secondary);
+
+}
+
+.clock-panel {
+
+    text-align: right;
+
+}
+
+#today {
+
+    color: var(--secondary);
+
+    margin-bottom: 5px;
+
+}
+
+#clock {
+
+    font-size: 28px;
+
+    font-weight: bold;
+
+    color: var(--blue);
+
+}
+
+/* ===========================
+   Cards
+=========================== */
+
+.card {
+
+    background: var(--card);
+
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+
+    padding: 22px;
+
+    transition: .25s;
+
+}
+
+.card:hover {
+
+    transform: translateY(-3px);
+
+    border-color: var(--blue);
+
+}
+
+.card-title {
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    margin-bottom: 18px;
+
+    color: var(--blue);
+
+}
+
+/* ===========================
+   Sprint Card
+=========================== */
+
+.sprint-card {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+
+}
+
+.sprint-card .left {
+
+    width: 60%;
+
+}
+
+.sprint-card .right {
+
+    width: 35%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+}
+
+#sprint {
+
+    font-size: 30px;
+
+    margin-bottom: 12px;
+
+}
+
+#progressText {
+
+    margin-bottom: 12px;
+
+    color: var(--secondary);
+
+    font-size: 17px;
+
+}
+
+progress {
+
+    width: 100%;
+
+    height: 20px;
+
+}
+
+/* ===========================
+   Dates
+=========================== */
+
+.date-box {
+
+    text-align: center;
+
+}
+
+.date-box span {
+
+    display: block;
+
+    color: var(--secondary);
+
+    font-size: 13px;
+
+    margin-bottom: 6px;
+
+}
+
+.date-box strong {
+
+    color: white;
+
+}
+
+/* ===========================
+   Dashboard Grid
+=========================== */
+
+.dashboard {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 20px;
+
+}
+
+/* ===========================
+   Lists
+=========================== */
+
+ul {
+
+    list-style: none;
+
+}
+
+li {
+
+    padding: 10px 0;
+
+    border-bottom: 1px solid var(--border);
+
+}
+
+li:last-child {
+
+    border-bottom: none;
+
+}
+
+/* ===========================
+   Team
+=========================== */
+
+.team-grid {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+}
+
+.team-grid span {
+
+    background: #21262d;
+
+    padding: 8px 14px;
+
+    border-radius: 25px;
+
+    border: 1px solid var(--border);
+
+    font-size: 14px;
+
+}
+
+/* ===========================
+   Focus
+=========================== */
+
+.focus-box {
+
+    font-size: 22px;
+
+    color: var(--green);
+
+    font-weight: bold;
+
+    line-height: 1.6;
+
+}
+
+/* ===========================
+   Rule
+=========================== */
+
+.rule-card {
+
+    grid-column: span 2;
+
+}
+
+#rule {
+
+    font-size: 22px;
+
+    color: var(--yellow);
+
+    line-height: 1.7;
+
+}
+
+/* ===========================
+   Footer
+=========================== */
+
+footer {
+
+    margin-top: 30px;
+
+    text-align: center;
+
+    color: var(--secondary);
+
+    border-top: 1px solid var(--border);
+
+    padding-top: 18px;
+
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media (max-width:900px){
+
+    .header{
+
+        flex-direction:column;
+
+        gap:20px;
+
+        align-items:flex-start;
+
+    }
+
+    .clock-panel{
+
+        text-align:left;
+
+    }
+
+    .sprint-card{
+
+        flex-direction:column;
+
+        gap:25px;
+
+    }
+
+    .sprint-card .left,
+    .sprint-card .right{
+
+        width:100%;
+
+    }
+
+    .dashboard{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .rule-card{
+
+        grid-column:auto;
+
+    }
 
 }
