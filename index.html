@@ -1,31 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JAK Technologies Sprint Counter</title>
 
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+
+<title>JAK Sprint Dashboard</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
 
 <div class="container">
 
-    <h3>JAK Technologies</h3>
+<h1 id="company"></h1>
 
-    <h1 id="sprint">Sprint 0</h1>
+<div class="card">
 
-    <p class="date">
-        Sprint started on <strong>29 June 2026</strong>
-    </p>
+<h2 id="sprint"></h2>
 
-    <div class="days">
-        <span id="dayCount">0</span>
-        <small>Days into Sprint</small>
-    </div>
+<div id="progressText"></div>
+
+<progress id="progress" max="100"></progress>
+
+<div class="dates">
+
+<div>
+<b>Start</b>
+<p id="start"></p>
+</div>
+
+<div>
+<b>End</b>
+<p id="end"></p>
+</div>
+
+<div>
+<b>Next Sprint</b>
+<p id="next"></p>
+</div>
 
 </div>
 
+</div>
+
+<div class="grid">
+
+<div class="card">
+<h3>🔥 Priorities</h3>
+<ul id="priorities"></ul>
+</div>
+
+<div class="card">
+<h3>📦 Projects</h3>
+<ul id="projects"></ul>
+</div>
+
+<div class="card">
+<h3>📅 Milestones</h3>
+<ul id="milestones"></ul>
+</div>
+
+<div class="card">
+<h3>📆 Meetings</h3>
+<ul id="meetings"></ul>
+</div>
+
+<div class="card">
+<h3>👥 Team</h3>
+<ul id="team"></ul>
+</div>
+
+<div class="card">
+<h3>💡 Rule of the Day</h3>
+<p id="rule"></p>
+</div>
+
+</div>
+
+</div>
+
+<script src="data.js"></script>
 <script src="script.js"></script>
 
 </body>
