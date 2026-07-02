@@ -1,80 +1,258 @@
+// =========================
+// Header
+// =========================
+
 document.getElementById("company").textContent = CONFIG.company;
 
-const start = new Date(CONFIG.sprintStart);
+// =========================
+// Live Clock
+// =========================
+
+function updateClock() {
+
+    const now = new Date();
+
+    document.getElementById("today").textContent =
+        now.toLocaleDateString(undefined, {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+        });
+
+    document.getElementById("clock").textContent =
+        now.toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit"
+        });
+
+}
+
+updateClock();
+
+setInterval(updateClock, 1000);
+
+// =========================
+// Sprint Information
+// =========================
+
+const sprintStart = new Date(CONFIG.sprintStart);
 
 const today = new Date();
 
 const sprintLength = CONFIG.sprintLength;
 
-const totalDays = Math.floor((today-start)/(1000*60*60*24));
+const MS_PER_DAY = 1000 * 60 * 60 * 24;
 
-const sprint = Math.floor(totalDays/sprintLength);
+const totalDays = Math.floor((today - sprintStart) / MS_PER_DAY);
 
-const day = totalDays%sprintLength+1;
+const sprintNumber = Math.max(0, Math.floor(totalDays / sprintLength));
 
-const remaining=sprintLength-day;
+const dayOfSprint = ((totalDays % sprintLength) + sprintLength) % sprintLength + 1;
 
-const progress=(day/sprintLength*100).toFixed(0);
+const sprintStartDate = new Date(sprintStart);
 
-const end=new Date(start);
+sprintStartDate.setDate(
+    sprintStart.getDate() + sprintNumber * sprintLength
+);
 
-end.setDate(start.getDate()+((sprint+1)*sprintLength)-1);
+const sprintEndDate = new Date(sprintStartDate);
 
-const next=new Date(end);
+sprintEndDate.setDate(
+    sprintStartDate.getDate() + sprintLength - 1
+);
 
-next.setDate(end.getDate()+1);
+const nextSprintDate = new Date(sprintEndDate);
 
-document.getElementById("sprint").innerHTML=`Sprint ${sprint}`;
+nextSprintDate.setDate(
+    sprintEndDate.getDate() + 1
+);
 
-document.getElementById("progressText").innerHTML=
-`Day ${day} of ${sprintLength} • ${remaining} Days Remaining`;
+const remainingDays = sprintLength - dayOfSprint;
 
-document.getElementById("progress").value=progress;
+const progress = Math.round((dayOfSprint / sprintLength) * 100);
 
-document.getElementById("start").textContent=start.toDateString();
+// =========================
+// Update Sprint Card
+// =========================
 
-document.getElementById("end").textContent=end.toDateString();
+document.getElementById("sprint").textContent =
+    `Sprint ${sprintNumber}`;
 
-document.getElementById("next").textContent=next.toDateString();
+document.getElementById("progressText").innerHTML =
+    `Day <b>${dayOfSprint}</b> of <b>${sprintLength}</b> &nbsp; • &nbsp; ${remainingDays} Days Remaining &nbsp; • &nbsp; ${progress}% Complete`;
 
-function fill(id,data,formatter){
+document.getElementById("progress").value = progress;
 
-const ul=document.getElementById(id);
+document.getElementById("start").textContent =
+    sprintStartDate.toLocaleDateString();
 
-data.forEach(x=>{
+document.getElementById("end").textContent =
+    sprintEndDate.toLocaleDateString();
 
-const li=document.createElement("li");
+document.getElementById("next").textContent =
+    nextSprintDate.toLocaleDateString();
 
-li.innerHTML=formatter?formatter(x):x;
+// =========================
+// Helper
+// =========================
 
-ul.appendChild(li);
+function createList(id, items, formatter) {
 
-});
+    const parent = document.getElementById(id);
+
+    parent.innerHTML = "";
+
+    items.forEach(item => {
+
+        const li = document.createElement("li");
+
+        li.innerHTML = formatter(item);
+
+        parent.appendChild(li);
+
+    });
 
 }
 
-fill("priorities",CONFIG.priorities);
+// =========================
+// Priorities
+// =========================
 
-fill("projects",CONFIG.projects,p=>`${p.name} - ${p.status}`);
+createList(
+    "priorities",
+    CONFIG.priorities,
+    p => p
+);
 
-fill("milestones",CONFIG.milestones,m=>`${m.date} - ${m.title}`);
+// =========================
+// Projects
+// =========================
 
-fill("meetings",CONFIG.meetings);
+createList(
+    "projects",
+    CONFIG.projects,
+    p => `
+        <strong>${p.health} ${p.name}</strong><br>
+        <small>${p.status}</small><br>
+        <span style="color:#8b949e;">Owner: ${p.owner}</span>
+    `
+);
 
-fill("team",CONFIG.team);
+// =========================
+// Milestones
+// =========================
 
-let index=0;
+createList(
+    "milestones",
+    CONFIG.milestones,
+    m => `
+        <strong>${m.title}</strong><br>
+        <small>${m.date}</small><br>
+        <span style="color:#8b949e;">${m.owner}</span>
+    `
+);
 
-document.getElementById("rule").textContent=CONFIG.rules[0];
+// =========================
+// Meetings
+// =========================
 
-setInterval(()=>{
+createList(
+    "meetings",
+    CONFIG.meetings,
+    m => `
+        <strong>${m.title}</strong><br>
+        <small>${m.schedule}</small>
+    `
+);
 
-index++;
+// =========================
+// Team
+// =========================
 
-if(index>=CONFIG.rules.length)
+const teamDiv = document.getElementById("team");
 
-index=0;
+teamDiv.innerHTML = "";
 
-document.getElementById("rule").textContent=CONFIG.rules[index];
+CONFIG.team.forEach(member => {
 
-},10000);
+    const badge = document.createElement("span");
+
+    badge.textContent = member;
+
+    teamDiv.appendChild(badge);
+
+});
+
+// =========================
+// Today's Focus
+// =========================
+
+let focus = "";
+
+if (dayOfSprint <= 3) {
+
+    focus = "Planning & Development";
+
+}
+else if (dayOfSprint <= 8) {
+
+    focus = "Feature Development";
+
+}
+else if (dayOfSprint <= 11) {
+
+    focus = "Testing & Code Reviews";
+
+}
+else if (dayOfSprint === 12) {
+
+    focus = "Bug Fixes & QA";
+
+}
+else if (dayOfSprint === 13) {
+
+    focus = "Sprint Planning & Sprint Demo";
+
+}
+else {
+
+    focus = "Deployment & Release Notes";
+
+}
+
+document.getElementById("focus").textContent = focus;
+
+// =========================
+// Rule Rotation
+// =========================
+
+let ruleIndex = 0;
+
+const ruleElement = document.getElementById("rule");
+
+function rotateRule() {
+
+    ruleElement.textContent = CONFIG.rules[ruleIndex];
+
+    ruleIndex++;
+
+    if (ruleIndex >= CONFIG.rules.length)
+        ruleIndex = 0;
+
+}
+
+rotateRule();
+
+setInterval(rotateRule, 10000);
+
+// =========================
+// Refresh Every Minute
+// =========================
+
+setInterval(() => {
+
+    location.reload();
+
+}, 60000);
