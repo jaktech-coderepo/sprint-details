@@ -1,88 +1,210 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8" />
 
-<title>JAK Sprint Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link rel="stylesheet" href="style.css">
+    <title>JAK Technologies | Engineering Dashboard</title>
+
+    <link rel="stylesheet" href="style.css" />
 
 </head>
 
 <body>
 
-<div class="container">
+    <div class="container">
 
-<h1 id="company"></h1>
+        <!-- Header -->
 
-<div class="card">
+        <header class="header">
 
-<h2 id="sprint"></h2>
+            <div>
 
-<div id="progressText"></div>
+                <h1 id="company"></h1>
 
-<progress id="progress" max="100"></progress>
+                <p class="subtitle">Engineering Sprint Dashboard</p>
 
-<div class="dates">
+            </div>
 
-<div>
-<b>Start</b>
-<p id="start"></p>
-</div>
+            <div class="clock-panel">
 
-<div>
-<b>End</b>
-<p id="end"></p>
-</div>
+                <div id="today"></div>
 
-<div>
-<b>Next Sprint</b>
-<p id="next"></p>
-</div>
+                <div id="clock"></div>
 
-</div>
+            </div>
 
-</div>
+        </header>
 
-<div class="grid">
+        <!-- Sprint Overview -->
 
-<div class="card">
-<h3>🔥 Priorities</h3>
-<ul id="priorities"></ul>
-</div>
+        <section class="card sprint-card">
 
-<div class="card">
-<h3>📦 Projects</h3>
-<ul id="projects"></ul>
-</div>
+            <div class="left">
 
-<div class="card">
-<h3>📅 Milestones</h3>
-<ul id="milestones"></ul>
-</div>
+                <h2 id="sprint"></h2>
 
-<div class="card">
-<h3>📆 Meetings</h3>
-<ul id="meetings"></ul>
-</div>
+                <p id="progressText"></p>
 
-<div class="card">
-<h3>👥 Team</h3>
-<ul id="team"></ul>
-</div>
+                <progress id="progress" max="100"></progress>
 
-<div class="card">
-<h3>💡 Rule of the Day</h3>
-<p id="rule"></p>
-</div>
+            </div>
 
-</div>
+            <div class="right">
 
-</div>
+                <div class="date-box">
 
-<script src="data.js"></script>
-<script src="script.js"></script>
+                    <span>Start</span>
+
+                    <strong id="start"></strong>
+
+                </div>
+
+                <div class="date-box">
+
+                    <span>End</span>
+
+                    <strong id="end"></strong>
+
+                </div>
+
+                <div class="date-box">
+
+                    <span>Next Sprint</span>
+
+                    <strong id="next"></strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Main Dashboard -->
+
+        <div class="dashboard">
+
+            <!-- Priorities -->
+
+            <section class="card">
+
+                <div class="card-title">
+
+                    🔥 Current Priorities
+
+                </div>
+
+                <ul id="priorities"></ul>
+
+            </section>
+
+            <!-- Projects -->
+
+            <section class="card">
+
+                <div class="card-title">
+
+                    📦 Projects
+
+                </div>
+
+                <ul id="projects"></ul>
+
+            </section>
+
+            <!-- Milestones -->
+
+            <section class="card">
+
+                <div class="card-title">
+
+                    📅 Upcoming Milestones
+
+                </div>
+
+                <ul id="milestones"></ul>
+
+            </section>
+
+            <!-- Meetings -->
+
+            <section class="card">
+
+                <div class="card-title">
+
+                    🤝 Meetings
+
+                </div>
+
+                <ul id="meetings"></ul>
+
+            </section>
+
+            <!-- Team -->
+
+            <section class="card">
+
+                <div class="card-title">
+
+                    👥 Team
+
+                </div>
+
+                <div id="team" class="team-grid"></div>
+
+            </section>
+
+            <!-- Today's Focus -->
+
+            <section class="card">
+
+                <div class="card-title">
+
+                    🎯 Today's Focus
+
+                </div>
+
+                <div id="focus" class="focus-box"></div>
+
+            </section>
+
+            <!-- Engineering Rule -->
+
+            <section class="card rule-card">
+
+                <div class="card-title">
+
+                    💡 Engineering Rule
+
+                </div>
+
+                <div id="rule"></div>
+
+            </section>
+
+        </div>
+
+        <!-- Footer -->
+
+        <footer>
+
+            <span>
+
+                Engineering Handbook • GitHub Projects • CI/CD • Design First
+
+            </span>
+
+        </footer>
+
+    </div>
+
+    <script src="data.js"></script>
+
+    <script src="script.js"></script>
 
 </body>
+
 </html>
